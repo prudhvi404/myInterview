@@ -8,12 +8,20 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import com.deloitte.interview.icecream.resource.*;
+
+import com.deloitte.interview.icecream.resource.Coins;
+import com.deloitte.interview.icecream.resource.Flavour;
+import com.deloitte.interview.icecream.resource.ServeIceCreamRequest;
+import com.deloitte.interview.icecream.resource.ServeIceCreamResponse;
+import com.deloitte.interview.icecream.resource.Status;
 import com.deloitte.interview.icecream.service.ServeIceCreamService;
 
 
+/**
+ * @author Prudhvi
+ *
+ */
 @SpringBootTest
 public class ServeIceCreamServiceTest {
 

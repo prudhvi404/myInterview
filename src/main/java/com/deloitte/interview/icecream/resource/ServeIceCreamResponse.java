@@ -3,6 +3,10 @@ package com.deloitte.interview.icecream.resource;
 import java.util.List;
 
 
+/**
+ * @author Prudhvi
+ *
+ */
 public class ServeIceCreamResponse {
 	private List<Coins> change;
 	private Status status;

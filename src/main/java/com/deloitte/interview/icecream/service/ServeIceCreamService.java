@@ -1,9 +1,7 @@
 package com.deloitte.interview.icecream.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -12,13 +10,22 @@ import com.deloitte.interview.icecream.resource.ServeIceCreamRequest;
 import com.deloitte.interview.icecream.resource.ServeIceCreamResponse;
 import com.deloitte.interview.icecream.resource.Status;
 
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+/**
+ * @author Prudhvi
+ *
+ */
 @Service
 @NoArgsConstructor
 public class ServeIceCreamService {
 
+	/**
+	 * This method is used to calculate the input amount
+	 * and return opted ice cream is served or not along with the change amount
+	 * @param serveIceCreamRequest
+	 * @return ServeIceCreamResponse 
+	 */
 	public ServeIceCreamResponse serveIceCream(ServeIceCreamRequest serveIceCreamRequest) {
 		ServeIceCreamResponse response = new ServeIceCreamResponse();
 		int amount = serveIceCreamRequest.getCoins().stream().mapToInt(i -> i.getValue()).sum();
@@ -40,6 +47,12 @@ public class ServeIceCreamService {
 
 	}
 
+	/**
+	 * This method is used to calculate the change amount
+	 * based on amount inserted and ice cream opted
+	 * @param change
+	 * @return List This returns the change in coins
+	 */
 	private List<Coins> countChange(int change) {
 		List<Coins> changeList = new ArrayList<>();
 

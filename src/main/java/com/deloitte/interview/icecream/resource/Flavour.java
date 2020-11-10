@@ -1,5 +1,9 @@
 package com.deloitte.interview.icecream.resource;
 
+/**
+ * @author Prudhvi
+ *
+ */
 public enum Flavour {
 	CHOCOLATE(40),VANILLA(20),STRAWBERRY(50);	
 	

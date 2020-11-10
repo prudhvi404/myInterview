@@ -13,11 +13,20 @@ import com.deloitte.interview.icecream.service.ServeIceCreamService;
 
 import lombok.AllArgsConstructor;
 
+/**
+ * @author Prudhvi
+ *
+ */
 @RestController
 @AllArgsConstructor
 public class IceCreamController{
 	@Autowired
 	private ServeIceCreamService serveIceCreamService;
+	/**
+	 * This method is used to serve the ice cream and return change
+	 * @param serveIceCreamRequest
+	 * @return ServeIceCreamResponse This returns served status and change 
+	 */
 	@PostMapping("/serveIceCream")
 	public ResponseEntity<ServeIceCreamResponse> serveIceCream(@RequestBody ServeIceCreamRequest serveIceCreamRequest)
 		{
@@ -31,9 +40,13 @@ public class IceCreamController{
 				
 		}
 	
+	/**
+	 * This method is used to build response
+	 * @param response
+	 * @return This returns HTTP status as OK and response body
+	 */
 	private ResponseEntity<ServeIceCreamResponse>  buildResponseEntity(ServeIceCreamResponse response) {
 		return ResponseEntity.status(HttpStatus.OK).body(response);
-		
 	}
 	
 	

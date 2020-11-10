@@ -6,35 +6,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.web.servlet.MockMvc;
 
-import com.deloitte.interview.icecream.resource.*;
+import com.deloitte.interview.icecream.resource.Coins;
+import com.deloitte.interview.icecream.resource.Flavour;
+import com.deloitte.interview.icecream.resource.ServeIceCreamRequest;
+import com.deloitte.interview.icecream.resource.ServeIceCreamResponse;
+import com.deloitte.interview.icecream.resource.Status;
 import com.deloitte.interview.icecream.service.ServeIceCreamService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * @author Prudhvi
+ *
+ */
 @SpringBootTest
+@RunWith(MockitoJUnitRunner.class)
 public class IceCreamControllerTest {
 
-	@Autowired
-	private MockMvc mockMvc;
-
-	@MockBean
+	@Mock
 	private ServeIceCreamService serveIceCreamService;
 	
 	@InjectMocks
-	@Autowired
 	private IceCreamController iceCreamController;
-	
-	private static ObjectMapper mapper = new ObjectMapper();
 
 	@Before
 	public void doSetup() {
@@ -43,7 +44,6 @@ public class IceCreamControllerTest {
 	//passing total amount as 41 cents and opting for Chocolate
 	@Test
 	public void testPostExample() throws Exception {
-		String uri = "/serveIceCream";
 		ServeIceCreamResponse serveIceCreamResponse = new ServeIceCreamResponse();
 		List<Coins> inputCoinsList = new ArrayList<>();
 		inputCoinsList.add(Coins.NICKLE);
@@ -60,21 +60,12 @@ public class IceCreamControllerTest {
 		Mockito.when(serveIceCreamService.serveIceCream(Mockito.any(ServeIceCreamRequest.class))).thenReturn(serveIceCreamResponse);
 		ResponseEntity<ServeIceCreamResponse> response = iceCreamController.serveIceCream(serveIceCreamRequest);
 			
-		/*
-		 * String json = mapper.writeValueAsString(serveIceCreamRequest); String content
-		 * = mockMvc .perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.
-		 * APPLICATION_JSON_VALUE).content(json))
-		 * .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-		 */
-
-		//final ServeIceCreamResponse response = mapper.readValue(content, ServeIceCreamResponse.class);
 		assertEquals(response.getBody().getStatus().toString(), "SERVED");
 
 	}
 	
 	@Test
 	public void testPostExampleWithLessAmount() throws Exception {
-		String uri = "/serveIceCream";
 		ServeIceCreamResponse serveIceCreamResponse = new ServeIceCreamResponse();
 		List<Coins> inputCoinsList = new ArrayList<>();
 		inputCoinsList.add(Coins.NICKLE);
@@ -86,15 +77,7 @@ public class IceCreamControllerTest {
 		serveIceCreamResponse.setChange(inputCoinsList);
 		Mockito.when(serveIceCreamService.serveIceCream(Mockito.any(ServeIceCreamRequest.class))).thenReturn(serveIceCreamResponse);
 		ResponseEntity<ServeIceCreamResponse> response = iceCreamController.serveIceCream(serveIceCreamRequest);
-			
-		/*
-		 * String json = mapper.writeValueAsString(serveIceCreamRequest); String content
-		 * = mockMvc .perform(MockMvcRequestBuilders.post(uri).contentType(MediaType.
-		 * APPLICATION_JSON_VALUE).content(json))
-		 * .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-		 */
-
-		//final ServeIceCreamResponse response = mapper.readValue(content, ServeIceCreamResponse.class);
+		
 		assertEquals(response.getBody().getStatus().toString(), "NOT_SERVED");
 
 	}

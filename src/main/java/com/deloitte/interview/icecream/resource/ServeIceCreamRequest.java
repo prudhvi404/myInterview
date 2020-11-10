@@ -2,6 +2,10 @@ package com.deloitte.interview.icecream.resource;
 
 import java.util.List;
 
+/**
+ * @author Prudhvi
+ *
+ */
 public class ServeIceCreamRequest {
 	private List<Coins> coins;
 	private Flavour flavour;
